@@ -8,7 +8,8 @@ import pandas as pd
 
 def sync_sheet():
     conn = st.connection("gsheets", type=GSheetsConnection)
-    st.session_state['df'] = conn.read()
+    st.session_state['df'] = conn.read(worksheet='Data', ttl=1)
+    st.session_state['exercises'] = conn.read(worksheet='Exercises', ttl=1)
 
 
 def reset_this_workout():
@@ -35,13 +36,7 @@ def get_previous_settings(exercise):
     return row_dict
 
 
-# To be replaced with a database of valid exercises at some point.
-exercises = ['',
-             'Bench Press',
-             'Squat',
-             'Dips',
-             'Bent-over Row',
-             'Pull-up']
+exercises = [''] + st.session_state['exercises']['exercises'].to_list()
 
 # Row 1
 with st.container():

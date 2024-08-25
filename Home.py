@@ -143,11 +143,12 @@ with entry_tab:
                 entry_tab.text('Current Session')
                 entry_tab.dataframe(st.session_state['this_workout'][[
                                     'Exercise', 'Weight', 'Sets', 'Reps', 'Last-set', 'Effort']])
-                c1, c2 = entry_tab.columns([0.8, 0.2])
+                c1, c2 = entry_tab.columns(
+                    [0.8, 0.2], vertical_alignment='bottom')
 
                 delete_index = c1.number_input('Select row index to delete',
                                                min_value=0, max_value=max([0, len(st.session_state['this_workout'].index)-1]), )
-                del_button = c2.button('D')
+                del_button = c2.button('Delete')
                 if del_button:
                     delete_row_by_index(delete_index)
                     st.rerun()

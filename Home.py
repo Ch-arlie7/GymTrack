@@ -109,6 +109,7 @@ with entry_tab:
         if submit_button and len(entry.index) > 0:
             push_data(entry)
             reset_key()
+            st.rerun()
 
         st.text('Recent Exercises')
         recent_exercises = st.session_state['df'][st.session_state['df']
